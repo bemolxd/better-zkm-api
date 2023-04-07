@@ -1,0 +1,23 @@
+# dependencies
+/node_modules
+
+# testing
+/coverage
+
+# production
+/dist
+
+# misc
+.DS_Store
+*.pem
+.vscode
+
+# debug
+yarn-debug.log*
+yarn-error.log*
+
+# local env files
+.env
+
+# typescript
+*.tsbuildinfo
