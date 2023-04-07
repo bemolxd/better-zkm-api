@@ -1,11 +1,12 @@
 {
   "name": "api",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "betterZKM API",
   "main": "src/index.ts",
   "scripts": {
     "dev": "nodemon src/index.ts",
-    "build": "rm -rf dist/ && prettier --write src/ && tsc"
+    "build": "rm -rf dist/ && prettier --write src/ && tsc",
+    "prod": "node dist/index.js"
   },
   "author": "Bartosz Bem <bartosz.bem@bemideas.pl> (bemolxd)",
   "license": "MIT",
