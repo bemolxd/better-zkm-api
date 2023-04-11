@@ -15,7 +15,7 @@ export const mapStops = async (soap: string) => {
           id: Number(stop.id),
           number: Number(stop.nr),
           name: stop.n,
-          vehicleType: stop.t.includes("A") ? "A" : "T",
+          vehicleType: stop.t.includes("T") ? "T" : "A",
           comments: stop.uwag.trim(),
           posX: Number(stop.x),
           posY: Number(stop.y),
