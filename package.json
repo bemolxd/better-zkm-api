@@ -4,6 +4,7 @@
   "description": "betterZKM API",
   "main": "src/index.ts",
   "scripts": {
+    "start": "node index.js",
     "dev": "nodemon src/index.ts",
     "build": "rm -rf dist/ && prettier --write src/ && tsc",
     "prod": "node dist/index.js"
