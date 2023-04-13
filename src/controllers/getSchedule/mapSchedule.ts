@@ -1,7 +1,9 @@
 import { parseStringPromise } from "xml2js";
 import { DaySchedule, ParsedFullInfoSoap, StopFullInfo } from "./types";
 
-export const mapSchedule = async (soap: string) => {
+export const mapSchedule = async (
+  soap: string
+): Promise<StopFullInfo | undefined> => {
   try {
     const parsedSoapRes: ParsedFullInfoSoap = await parseStringPromise(soap);
 
@@ -10,7 +12,11 @@ export const mapSchedule = async (soap: string) => {
         .GetPlanedDeparutresFullInfoResponse[0]
         .GetPlanedDeparutresFullInfoResult[0].Schedules[0];
 
-    const stopInfo: StopFullInfo | undefined = {
+    if (!parsedSchedules) {
+      return undefined;
+    }
+
+    const stopInfo: StopFullInfo = {
       time: parsedSchedules?.$.time!,
       name: parsedSchedules?.Stop[0].$.name.trim()!,
       number: Number(parsedSchedules?.Stop[0].$.num),

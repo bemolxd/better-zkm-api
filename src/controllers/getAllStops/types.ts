@@ -39,6 +39,6 @@ export type Stop = {
   name: string;
   vehicleType: "A" | "T";
   comments: string;
-  posX: number;
-  posY: number;
+  lng: number;
+  lat: number;
 };

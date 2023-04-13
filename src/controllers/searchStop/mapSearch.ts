@@ -1,11 +1,18 @@
 import { parseStringPromise } from "xml2js";
 import { AvailableStop, ParsedSearchSoap } from "./types";
 
-export const mapSearch = async (soapData: string) => {
+export const mapSearch = async (soapData: string): Promise<AvailableStop[]> => {
   try {
     const parsedSoapRes: ParsedSearchSoap = await parseStringPromise(soapData);
 
-    const stops: AvailableStop[] | undefined = parsedSoapRes["soap:Envelope"]?.[
+    if (
+      !parsedSoapRes["soap:Envelope"]?.["soap:Body"][0]
+        .GetStopsByNameResponse[0].GetStopsByNameResult[0].Stops[0].S
+    ) {
+      return [];
+    }
+
+    const stops: AvailableStop[] = parsedSoapRes["soap:Envelope"]?.[
       "soap:Body"
     ][0].GetStopsByNameResponse[0].GetStopsByNameResult[0].Stops[0].S.map(
       (s) => {
@@ -15,8 +22,8 @@ export const mapSearch = async (soapData: string) => {
           id: Number(stop.id),
           name: stop.name,
           comments: stop.uwg.trim(),
-          posX: Number(stop.x),
-          posY: Number(stop.y),
+          lng: Number(stop.x),
+          lat: Number(stop.y),
           lines: stop.l.split(";").map((l) => {
             const line = l.split(",");
 

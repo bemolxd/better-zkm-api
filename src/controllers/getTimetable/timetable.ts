@@ -8,6 +8,12 @@ export const getTimetable = async (
   res: Response
 ) => {
   try {
+    if (!req.query.stopId) {
+      return res
+        .status(400)
+        .json({ message: "failure", error: "You must specify stopId" });
+    }
+
     const soap = await callSoap(getSoapXML(req.query.stopId));
 
     const timetable = await mapTimetable(soap.data);

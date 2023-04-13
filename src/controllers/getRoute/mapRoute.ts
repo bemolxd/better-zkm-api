@@ -1,7 +1,7 @@
 import { parseStringPromise } from "xml2js";
 import { MapLine, ParsedRoutesJSON, Route, RouteStop } from "./types";
 
-export const mapRoutes = async (soap: string) => {
+export const mapRoutes = async (soap: string): Promise<Route[]> => {
   try {
     const parsedSoap = soap
       .match(/<json>(.*?)<\/json>/)

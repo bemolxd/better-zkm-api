@@ -36,8 +36,8 @@ export type AvailableStop = {
   id: number;
   name: string;
   comments: string;
-  posX: number;
-  posY: number;
+  lng: number;
+  lat: number;
   lines: AvailableStopLine[];
 };
 

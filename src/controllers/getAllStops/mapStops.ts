@@ -5,7 +5,14 @@ export const mapStops = async (soap: string) => {
   try {
     const parsedSoap: ParsedStopSoap = await parseStringPromise(soap);
 
-    const stops: Stop[] | undefined = parsedSoap["soap:Envelope"]?.[
+    if (
+      !parsedSoap["soap:Envelope"]?.["soap:Body"][0]?.GetGoogleStopsResponse[0]
+        ?.GetGoogleStopsResult[0]?.Stops[0]?.S
+    ) {
+      return [];
+    }
+
+    const stops: Stop[] = parsedSoap["soap:Envelope"]?.[
       "soap:Body"
     ][0]?.GetGoogleStopsResponse[0]?.GetGoogleStopsResult[0]?.Stops[0]?.S.map(
       (s) => {
@@ -17,13 +24,13 @@ export const mapStops = async (soap: string) => {
           name: stop.n,
           vehicleType: stop.t.includes("T") ? "T" : "A",
           comments: stop.uwag.trim(),
-          posX: Number(stop.x),
-          posY: Number(stop.y),
+          lng: Number(stop.x),
+          lat: Number(stop.y),
         };
       }
     );
 
-    return stops;
+    return stops ?? [];
   } catch (error) {
     console.error(error);
     throw new Error("SOAP XML data mapping error");
