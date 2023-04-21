@@ -1,15 +1,15 @@
 import { Response } from "express";
-import { RequestWithBody, callSoap } from "../../utils";
+import { callSoap, RequestWithQuery } from "../../utils";
 import { getSoapXML } from "./getSoapXML";
 import { mapRoutes } from "./mapRoute";
-import { RouteReqBody } from "./types";
+import { RouteReqQuery } from "./types";
 
 export const getRoute = async (
-  req: RequestWithBody<RouteReqBody>,
+  req: RequestWithQuery<RouteReqQuery>,
   res: Response
 ) => {
   try {
-    const soap = await callSoap(getSoapXML(req.body));
+    const soap = await callSoap(getSoapXML(req.query));
 
     const route = await mapRoutes(soap.data);
 

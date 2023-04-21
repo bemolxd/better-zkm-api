@@ -73,27 +73,18 @@ export type ParsedFullInfoSoap = {
 export type StopFullInfo = {
   time: string;
   name: string;
-  number: number;
+  stopNr: number;
   id: number;
-  schedule: FullInfoSchedule;
+  lines: LineSchedule[];
 };
 
-export type FullInfoSchedule = {
-  sunday: DaySchedule;
-  working: DaySchedule;
-  saturday: DaySchedule;
-};
-
-export type DaySchedule = {
-  actual: boolean;
-  lines: ScheduleLine[] | undefined;
-};
-
-export type ScheduleLine = {
+export type LineSchedule = {
   number: number;
   vehicleType: "A" | "T";
   direction: string;
-  departures: ScheduleDeparture[] | undefined;
+  working?: ScheduleDeparture[];
+  saturday?: ScheduleDeparture[];
+  sunday?: ScheduleDeparture[];
 };
 
 export type ScheduleDeparture = {

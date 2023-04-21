@@ -41,7 +41,7 @@ export type RouteStop = {
   departureTime: number;
 };
 
-export type RouteReqBody = {
+export type RouteReqQuery = {
   px1: string;
   py1: string;
   px2: string;
