@@ -6,7 +6,6 @@ import { getTimetable } from "../controllers/getTimetable/timetable";
 import { getSchedule } from "../controllers/getSchedule/schedule";
 import { getRoute } from "../controllers/getRoute/route";
 import { getNearbyStops } from "../controllers/getNearbyStops/nearby";
-import { getCurrentVersion } from "../controllers/getCurrentVersion/version";
 
 const router = express.Router();
 
@@ -17,6 +16,5 @@ router.get("/timetable", getTimetable);
 router.get("/schedule", getSchedule);
 router.get("/route", getRoute);
 router.get("/nearby", getNearbyStops);
-router.get("/version", getCurrentVersion);
 
 export = router;
