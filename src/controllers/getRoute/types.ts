@@ -22,6 +22,7 @@ export type Route = {
 export type MapLine = {
   line: number;
   coords: Coordinate[];
+  vehicleType?: "A" | "T";
 };
 
 export type Coordinate = {

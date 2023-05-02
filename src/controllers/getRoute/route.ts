@@ -11,11 +11,11 @@ export const getRoute = async (
   try {
     const soap = await callSoap(getSoapXML(req.query));
 
-    const route = await mapRoutes(soap.data);
+    const routes = await mapRoutes(soap.data);
 
     res.status(200).json({
       message: "success",
-      results: route,
+      result: routes,
     });
   } catch (error) {
     console.error(error);

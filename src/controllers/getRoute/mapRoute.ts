@@ -39,13 +39,15 @@ export const mapRoutes = async (soap: string): Promise<Route[]> => {
         (key) => ({
           line: Number(key),
           coords: mapPoints[key],
+          vehicleType: routeStops.filter((s) => s.lineIdx === Number(key))[0]
+            .vehicleType,
         })
       );
 
       return {
-        id: res.id + res.start_time,
-        startTime: res.start_time,
-        endTime: res.end_time,
+        id: res.id + res.journey_start,
+        startTime: res.journey_start,
+        endTime: res.journey_end,
         mapLines,
         routeStops,
       };

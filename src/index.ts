@@ -1,7 +1,9 @@
-import "dotenv/config";
+import * as dotenv from "dotenv";
 import http from "http";
 import express, { Express } from "express";
 import routes from "./routes";
+
+dotenv.config();
 
 const router: Express = express();
 
