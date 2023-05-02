@@ -6,7 +6,8 @@
   "scripts": {
     "start": "node index.js",
     "dev": "nodemon src/index.ts",
-    "build": "rm -rf dist/ && prettier --write src/ && tsc"
+    "build": "rm -rf dist/ && prettier --write src/ && tsc",
+    "postbuild": "cp package.json dist/package.json && cd dist && yarn install --production"
   },
   "author": "Bartosz Bem <bartosz.bem@bemideas.pl> (bemolxd)",
   "license": "MIT",
