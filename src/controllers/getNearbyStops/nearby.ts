@@ -23,7 +23,7 @@ export const getNearbyStops = async (
 
     const soap = await callSoap(soapXML);
     const stops = await mapStops(soap.data);
-    const nearby = mapNearby(Number(coords[0]), Number(coords[1]), stops ?? []);
+    const nearby = mapNearby(Number(coords[1]), Number(coords[0]), stops ?? []);
 
     return success(res, nearby);
   } catch (error) {
