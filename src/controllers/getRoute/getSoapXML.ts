@@ -1,4 +1,11 @@
-import { RouteReqQuery } from "./types";
+type Args = {
+  px1: string;
+  py1: string;
+  px2: string;
+  py2: string;
+  time: string;
+  date: string;
+};
 
 export const getSoapXML = ({
   px1,
@@ -7,7 +14,7 @@ export const getSoapXML = ({
   py2,
   time,
   date,
-}: RouteReqQuery) => `<?xml version='1.0' encoding='utf-8'?>
+}: Args) => `<?xml version='1.0' encoding='utf-8'?>
 <soap:Envelope
 	xmlns:xsi='http://www.w3.org/2001/XMLSchema-instance'
 	xmlns:xsd='http://www.w3.org/2001/XMLSchema'

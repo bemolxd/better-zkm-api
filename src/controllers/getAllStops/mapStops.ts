@@ -1,7 +1,7 @@
 import { parseStringPromise } from "xml2js";
 import { ParsedStopSoap, Stop } from "./types";
 
-export const mapStops = async (soap: string) => {
+export const mapStops = async (soap: string): Promise<Stop[]> => {
   try {
     const parsedSoap: ParsedStopSoap = await parseStringPromise(soap);
 

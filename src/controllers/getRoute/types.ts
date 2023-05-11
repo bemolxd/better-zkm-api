@@ -43,10 +43,8 @@ export type RouteStop = {
 };
 
 export type RouteReqQuery = {
-  px1: string;
-  py1: string;
-  px2: string;
-  py2: string;
+  fc: string;
+  tc: string;
   time: string;
   date: string;
 };

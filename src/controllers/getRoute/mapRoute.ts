@@ -19,7 +19,10 @@ export const mapRoutes = async (soap: string): Promise<Route[]> => {
     const routes: Route[] = fixedJSON.map((res) => {
       const routeStops: RouteStop[] = res.data.map((stop) => ({
         id: stop[0],
-        name: stop[1],
+        name: stop[1].replace(
+          /(&#(\d+);)/g,
+          (_: any, __: any, charCode: number) => String.fromCharCode(charCode)
+        ),
         lng: stop[2],
         lat: stop[3],
         line: Number(stop[6]),

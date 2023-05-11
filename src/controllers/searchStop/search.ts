@@ -1,5 +1,5 @@
 import { Response } from "express";
-import { callSoap, RequestWithQuery } from "../../utils";
+import { callSoap, RequestWithQuery, serverError, success } from "../../utils";
 import { getSoapXML } from "./getSoapXML";
 import { mapSearch } from "./mapSearch";
 
@@ -12,9 +12,8 @@ export const searchStops = async (
 
     const search = await mapSearch(soap.data);
 
-    return res.status(200).json({ message: "success", result: search });
+    return success(res, search);
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: "error", error });
+    return serverError(res, error);
   }
 };

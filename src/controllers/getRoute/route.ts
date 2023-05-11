@@ -1,24 +1,41 @@
 import { Response } from "express";
-import { callSoap, RequestWithQuery } from "../../utils";
+import {
+  badRequest,
+  callSoap,
+  RequestWithQuery,
+  serverError,
+  success,
+} from "../../utils";
 import { getSoapXML } from "./getSoapXML";
 import { mapRoutes } from "./mapRoute";
 import { RouteReqQuery } from "./types";
+import { mapQuery } from "./mapQuery";
 
 export const getRoute = async (
   req: RequestWithQuery<RouteReqQuery>,
   res: Response
 ) => {
   try {
-    const soap = await callSoap(getSoapXML(req.query));
+    const fc = req.query.fc.split(":");
+    const tc = req.query.tc.split(":");
+
+    if (fc.length == 0 || tc.length == 0) {
+      return badRequest(res, "Wrong coordinates specified");
+    }
+
+    const mappedQuery = mapQuery({
+      fc,
+      tc,
+      time: req.query.time,
+      date: req.query.date,
+    });
+
+    const soap = await callSoap(getSoapXML(mappedQuery));
 
     const routes = await mapRoutes(soap.data);
 
-    res.status(200).json({
-      message: "success",
-      result: routes,
-    });
+    return success(res, routes);
   } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "failure", error });
+    return serverError(res, error);
   }
 };

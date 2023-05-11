@@ -1,5 +1,11 @@
 import { Response } from "express";
-import { callSoap, RequestWithQuery } from "../../utils";
+import {
+  badRequest,
+  callSoap,
+  RequestWithQuery,
+  serverError,
+  success,
+} from "../../utils";
 import { getSoapXML } from "./getSoapXML";
 import { mapSchedule } from "./mapSchedule";
 
@@ -8,13 +14,16 @@ export const getSchedule = async (
   res: Response
 ) => {
   try {
+    if (!req.query.stopId) {
+      return badRequest(res, "You must specify stopId");
+    }
+
     const soap = await callSoap(getSoapXML(req.query.stopId));
 
-    const timetable = await mapSchedule(soap.data);
+    const schedule = await mapSchedule(soap.data);
 
-    return res.status(200).json({ message: "success", result: timetable });
+    return success(res, schedule);
   } catch (error) {
-    console.error(error);
-    return res.status(500).json({ message: "error", error });
+    return serverError(res, error);
   }
 };
