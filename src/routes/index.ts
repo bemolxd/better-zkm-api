@@ -14,7 +14,7 @@ router.get("/streets", getAllStreets);
 router.get("/search", searchStops);
 router.get("/timetable", getTimetable);
 router.get("/schedule", getSchedule);
-router.get("/route", getRoute);
+router.post("/route", getRoute);
 router.get("/nearby", getNearbyStops);
 
 export = router;

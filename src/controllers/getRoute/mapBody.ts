@@ -7,7 +7,7 @@ type Args = {
   date: string;
 };
 
-type MapQueryReturnType = {
+type MapBodyReturnType = {
   px1: string;
   py1: string;
   px2: string;
@@ -16,7 +16,7 @@ type MapQueryReturnType = {
   date: string;
 };
 
-export const mapQuery = ({ fc, tc, time, date }: Args): MapQueryReturnType => {
+export const mapBody = ({ fc, tc, time, date }: Args): MapBodyReturnType => {
   return {
     px1: fc[0],
     py1: fc[1],

@@ -2,32 +2,32 @@ import { Response } from "express";
 import {
   badRequest,
   callSoap,
-  RequestWithQuery,
+  RequestWithBody,
   serverError,
   success,
 } from "../../utils";
 import { getSoapXML } from "./getSoapXML";
 import { mapRoutes } from "./mapRoute";
-import { RouteReqQuery } from "./types";
-import { mapQuery } from "./mapQuery";
+import { RouteReqBody } from "./types";
+import { mapBody } from "./mapBody";
 
 export const getRoute = async (
-  req: RequestWithQuery<RouteReqQuery>,
+  req: RequestWithBody<RouteReqBody>,
   res: Response
 ) => {
   try {
-    const fc = req.query.fc.split(":");
-    const tc = req.query.tc.split(":");
+    const fc = req.body.fc.split(":");
+    const tc = req.body.tc.split(":");
 
     if (fc.length == 0 || tc.length == 0) {
       return badRequest(res, "Wrong coordinates specified");
     }
 
-    const mappedQuery = mapQuery({
+    const mappedQuery = mapBody({
       fc,
       tc,
-      time: req.query.time,
-      date: req.query.date,
+      time: req.body.time,
+      date: req.body.date,
     });
 
     const soap = await callSoap(getSoapXML(mappedQuery));

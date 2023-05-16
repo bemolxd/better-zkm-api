@@ -42,7 +42,7 @@ export type RouteStop = {
   departureTime: number;
 };
 
-export type RouteReqQuery = {
+export type RouteReqBody = {
   fc: string;
   tc: string;
   time: string;
