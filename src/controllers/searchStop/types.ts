@@ -42,6 +42,6 @@ export type AvailableStop = {
 };
 
 export type AvailableStopLine = {
-  number: number;
+  number: string;
   vehicleType: "A" | "T";
 };
