@@ -28,7 +28,7 @@ export const mapSearch = async (soapData: string): Promise<AvailableStop[]> => {
             const line = l.split(",");
 
             return {
-              number: Number(line[0]),
+              number: line[0],
               vehicleType: line[1].includes("A") ? "A" : "T",
             };
           }),
